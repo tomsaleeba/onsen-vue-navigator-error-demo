@@ -1,6 +1,9 @@
 > minimal reproduction of an error I'm having with Onsen's Vue binding
 
 # Run it
+See the [live demo](https://tomsaleeba.github.io/onsen-vue-navigator-error-demo/index.html).
+
+Or run it locally:
   1. clone the repo
   1. install deps: `yarn`
   1. start the HTTP server: `yarn start`
@@ -8,6 +11,7 @@
   1. look at the devtools console
 
 The page is self contained, so you can run it any way you like.
+
 
 # What is the error?
 
