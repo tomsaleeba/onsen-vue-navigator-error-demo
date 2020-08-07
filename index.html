@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+  <!-- I'm using the latest versions at the time of writing, but pinning for future-proofing -->
+  <!-- <script src="https://unpkg.com/onsenui/js/onsenui.js"></script> -->
+  <script src="https://unpkg.com/onsenui@2.10.10/js/onsenui.js"></script>
+  <!-- <script src="https://unpkg.com/vue-onsenui/dist/vue-onsenui.js"></script> -->
+  <script src="https://unpkg.com/vue-onsenui@2.6.2/dist/vue-onsenui.js"></script>
+  <script type="text/babel">
+    ons.ready(function() {
+      const page1 = {
+        key: 'page1',
+        template: '#page1',
+      };
+
+      new Vue({
+        el: '#app',
+        template: '#main',
+        data() {
+          return {
+            pageStack: []
+          };
+        },
+        mounted(){ // It seems any change to the stack during "mounted" causes the error
+        // beforeMount() { // getting the change in *before* mounted works
+
+          this.pageStack.push(page1)
+          // this.pageStack.splice(0, this.pageStack.length, page1)
+          // this.pageStack = [page1]
+
+          // A change after "mounted" causes the error. You can schedule this in
+          // mounted or beforeMounted but if it fires after mount, the error
+          // will happen.
+          // setTimeout(()=>{
+          //   this.pageStack.push(page1)
+          // }, 3000)
+        },
+      });
+    });
+  </script>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.css">
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300italic,300,500,400italic,500italic,700,700italic' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <template id="main">
+    <v-ons-navigator swipeable :page-stack="pageStack" @push-page="pageStack.push($event)"></v-ons-navigator>
+  </template>
+
+  <template id="page1">
+    <v-ons-page>
+      <v-ons-toolbar>
+        <div class="center">Page 1</div>
+      </v-ons-toolbar>
+      <p style="text-align: center">
+        This is the first page
+      </p>
+    </v-ons-page>
+  </template>
+
+  <div id="app"></div>
+</body>
+
+</html>
